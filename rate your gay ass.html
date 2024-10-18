@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I like tiddies</title>
+    <link rel="stylesheet" href="jomok.css">
+</head>
+<body>
+    <div class="container">
+        <h1>put ur name pookie OwO </h1>
+        <p>Masukkan nama Anda, dan lihat hasilnya </p>
+        <input type="text" id="nameInput" placeholder="Masukkan nama Anda">
+        <button onclick="checkGay()">Cek Sekarang</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // Simple hash function to get a numeric value from the name
+        function stringToHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                hash = str.charCodeAt(i) + ((hash << 5) - hash); // Generate hash based on the string
+            }
+            return Math.abs(hash); // Ensure the hash is positive
+        }
+
+        function checkGay() {
+            const name = document.getElementById('nameInput').value;
+            if (name === "") {
+                document.getElementById('result').innerHTML = "Silakan masukkan nama!";
+                return;
+            }
+
+            const hash = stringToHash(name); // Get hash value of the name
+            const randomFactor = Math.random() * 1000; // Introduce an additional random factor
+            const combinedRandom = (hash + randomFactor) % 100; // Combine hash and random factor
+
+            // Define thresholds for results
+            const result = combinedRandom < 50 ? "Lmao gay!" : "straight as a line!";
+            document.getElementById('result').innerHTML = `<h2>${result}</h2>`;
+        }
+    </script>
+</body>
+</html>
